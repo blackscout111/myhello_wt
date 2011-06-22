@@ -39,26 +39,31 @@ EXEC = myhello.wt
 # The object files needed
 OBJS = myhello.o
 
+
 ################################################################################
 # Build the executable from the object files
+################################################################################
+
+# Build the executable
 $(EXEC) : $(OBJS)
 	$(COMPILER) $(CFLAGS) \
 	$(OBJS) \
 	$(INCLUDE_DIRS) $(LIB_DIRS) $(LINK_LIBS) \
 	-o $(EXEC)
-	-ln -s $(WT_RESOURCES) .	# Create a link to the standard Wt resources
+	@-ln -s $(WT_RESOURCES) .	# Create a link to the standard Wt resources
 
-# Build the object files
+# Build the main object file
 myhello.o : myhello.cpp
 	$(COMPILER) $(CFLAGS) \
 	$(INCLUDE_DIRS) $(LIB_DIRS) $(LINK_LIBS) \
-	-c myhello.cpp 
+	-c myhello.cpp
+
 
 ################################################################################
 # Clean up the build dependencies
+################################################################################
 clean:
-	@-rm -f $(OBJS)
-
+	@rm -f $(OBJS)
 
 
 
