@@ -17,7 +17,8 @@ WT_RESOURCES = /usr/local/shared/wt/resources
 
 # Include directories
 INCLUDE_DIRS = -I/usr/include \
-			   -I/usr/local/include
+			   -I/usr/local/include \
+			   -Iinclude
 
 # Library directories
 LIB_DIRS = -L/usr/lib \
@@ -37,7 +38,8 @@ CFLAGS = -Wall
 EXEC = myhello.wt
 
 # The object files needed
-OBJS = myhello.o
+OBJS = myhello.o \
+	   HelloApplication.o
 
 
 ################################################################################
@@ -57,6 +59,12 @@ myhello.o : myhello.cpp
 	$(COMPILER) $(CFLAGS) \
 	$(INCLUDE_DIRS) $(LIB_DIRS) $(LINK_LIBS) \
 	-c myhello.cpp
+
+# Build HelloApplication object
+HelloApplication.o : src/HelloApplication.cpp
+	$(COMPILER) $(CFLAGS) \
+	$(INCLUDE_DIRS) $(LIB_DIRS) $(LINK_LIBS) \
+	-c src/HelloApplication.cpp
 
 
 ################################################################################
