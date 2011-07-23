@@ -9,7 +9,6 @@
 #include <Wt/WText>
 
 using namespace Wt;
-
 /*
  * A simple hello world application class which demonstrates how to react
  * to events, read input, and give feed-back.
@@ -26,8 +25,8 @@ public:
   HelloApplication(const WEnvironment& env);
 
 private:
-  WLineEdit *nameEdit_;
-  WText *greeting_;
+  WLineEdit *m_nameEdit;
+  WText *m_greeting;
 
   void greet();
   void exit();

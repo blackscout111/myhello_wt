@@ -3,39 +3,47 @@ using namespace Wt;
 
 //______________________________________________________________________________
 HelloApplication::HelloApplication(const WEnvironment& env)
-  : WApplication(env)
+: WApplication(env)
 {
-  setTitle("Hello world");                               // application title
+	// Application Title
+	setTitle("Hello world");
 
-  root()->addWidget(new WText("Your name, please ? "));  // show some text
-  nameEdit_ = new WLineEdit(root());                     // allow text input
-  nameEdit_->setFocus();                                 // give focus
+	// Show some text
+	root()->addWidget(new WText("Your name, please ? "));
 
-  WPushButton *b1 = new WPushButton("Greet me.", root());// create a button
-  b1->setMargin(5, Left);                                 // add 5 pixels margin
+	// Add an editable text box and put the cursor in it
+	m_nameEdit = new WLineEdit(root());
+	m_nameEdit->setFocus();
 
-  root()->addWidget(new WBreak());                       // insert a line break
 
-  greeting_ = new WText(root());                         // empty text
+	// Create a push-button with a 5 pixel margin
+	WPushButton *b1 = new WPushButton("Greet me.", root());
 
-  /*
-   * Connect signals with slots
-   *
-   * - simple Wt-way
-   */
-  b1->clicked().connect(this, &HelloApplication::greet);
+	// Insert a line break
+	root()->addWidget(new WBreak());
 
-  /*
-   * - using an arbitrary function object (binding values with boost::bind())
-   */
-  nameEdit_->enterPressed().connect(this, &HelloApplication::greet);
+	// Make an area for text
+	m_greeting = new WText(root());
 
-  // Add line break
-  root()->addWidget(new WBreak());
+	/*
+	 * Connect signals with slots
+	 *
+	 * - simple Wt-way
+	 */
+	b1->clicked().connect(this, &HelloApplication::greet);
 
-  // Add a exit button
-  WPushButton *b2 = new WPushButton("Exit", root());
-  b2->clicked().connect(this, &HelloApplication::exit);
+	/*
+	 * - using an arbitrary function object (binding values with boost::bind())
+	 */
+	m_nameEdit->enterPressed().connect
+			(boost::bind(&HelloApplication::greet, this));
+
+	// Add line break
+	root()->addWidget(new WBreak());
+
+	// Add a exit button
+	WPushButton *b2 = new WPushButton("Exit", root());
+	b2->clicked().connect(this, &HelloApplication::exit);
 
 }
 
@@ -43,10 +51,10 @@ HelloApplication::HelloApplication(const WEnvironment& env)
 //______________________________________________________________________________
 void HelloApplication::greet()
 {
-  /*
-   * Update the text, using text input into the nameEdit_ field.
-   */
-  greeting_->setText("Hello there, " + nameEdit_->text());
+	/*
+	 * Update the text, using text input into the nameEdit_ field.
+	 */
+	m_greeting->setText("Hello there, " + m_nameEdit->text());
 }
 
 
