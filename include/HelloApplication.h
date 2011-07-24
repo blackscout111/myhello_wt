@@ -8,6 +8,7 @@
 #include <Wt/WPushButton>
 #include <Wt/WText>
 
+
 using namespace Wt;
 /*
  * A simple hello world application class which demonstrates how to react

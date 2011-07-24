@@ -49,8 +49,12 @@ CFLAGS = -Wall
 
 # The source object files needed
 #   - These objects should correspond to .cpp files in the source directory that
-#     need to be included in the project
-SRC_OBJS =	HelloApplication.o \
+#     need to be included in the project.  Each of these files should have a
+#     corresponding header file in the include directory
+SRC_FILES =	HelloApplication.cpp \
+
+# These are the objects to be made corresponding to the needed source files
+SRC_OBJS = $(patsubst %.cpp, %.o, $(SRC_FILES))
 
 # The name of the executable
 EXECNAME = myhello
@@ -88,12 +92,13 @@ $(EXECNAME).o : $(EXECNAME).cpp
 #===============================================================================
 # Build all of the source object files (These should be in the source folder)
 #===============================================================================
-$(SRC_OBJS) : %.o : $(SRC_DIR)/%.cpp
+
+# Build the object files corresponding to the source files
+$(SRC_OBJS) : %.o : $(SRC_DIR)/%.cpp $(INC_DIR)/%.h
 	@echo Building $@
 	@$(COMPILER) $(CFLAGS) \
 	$(INCLUDE_DIRS) $(LIB_DIRS) $(LINK_LIBS) \
 	-c $<
-
 
 ################################################################################
 # Clean up the build dependencies
