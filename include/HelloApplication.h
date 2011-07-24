@@ -17,20 +17,20 @@ using namespace Wt;
 class HelloApplication : public WApplication
 {
 public:
-/*
- * The env argument contains information about the new session, and
- * the initial request. It must be passed to the WApplication
- * constructor so it is typically also an argument for your custom
- * application constructor.
-*/
-  HelloApplication(const WEnvironment& env);
+	/*
+	 * The env argument contains information about the new session, and
+	 * the initial request. It must be passed to the WApplication
+	 * constructor so it is typically also an argument for your custom
+	 * application constructor.
+	 */
+	HelloApplication(const WEnvironment& env);
 
 private:
-  WLineEdit *m_nameEdit;
-  WText *m_greeting;
+	WLineEdit *m_nameEdit;
+	WText *m_greeting;
 
-  void greet();
-  void exit();
+	void greet();
+	void exit();
 };
 
 
