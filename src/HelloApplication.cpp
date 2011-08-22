@@ -63,4 +63,5 @@ void HelloApplication::exit()
 {
 	root()->clear();
 	WApplication::quit();
+	std::exit(EXIT_SUCCESS);
 }
